@@ -1,0 +1,54 @@
+{
+  "name": "pixel-sketch",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/App.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config webpack.prod.cjs",
+    "serve": "webpack serve --config webpack.dev.cjs",
+    "patch:patch": "patch-package svelte",
+    "patch:apply": "patch-package"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kibebr/pixel-sketch.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kibebr/pixel-sketch/issues"
+  },
+  "homepage": "https://github.com/kibebr/pixel-sketch#readme",
+  "devDependencies": {
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^5.0.1",
+    "dotenv": "^8.2.0",
+    "dotenv-webpack": "^6.0.0",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^4.5.0",
+    "mini-css-extract-plugin": "^1.3.3",
+    "optimize-css-assets-webpack-plugin": "^5.0.4",
+    "patch-package": "^6.2.2",
+    "style-loader": "^2.0.0",
+    "svelte": "^3.31.0",
+    "svelte-inline-svg": "^1.0.5",
+    "svelte-loader": "github:smittyvb/svelte-loader#update-virtual-modules",
+    "svelte-select": "^3.16.1",
+    "svelte-spa-router": "^3.1.0",
+    "svg-inline-loader": "^0.8.2",
+    "svg-url-loader": "^7.1.1",
+    "terser-webpack-plugin": "^5.0.3",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.10.0",
+    "webpack-cli": "^4.2.0",
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^5.7.0",
+    "webpack-virtual-modules": "^0.4.1"
+  },
+  "type": "module",
+  "dependencies": {
+    "@jaames/iro": "^5.3.1"
+  }
+}

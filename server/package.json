@@ -1,0 +1,59 @@
+{
+  "name": "ca-mongoose",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:babel": "json -I -f package.json -e 'this.type=\"commonjs\"' && babel -d ./build ./lib/ -s",
+    "start": "npm run build:babel && node ./build/app.js",
+    "start:test": "json -I -f package.json -e 'this.type=\"module\"' && nodemon ./lib/app.js",
+    "test": "json -I -f package.json -e 'this.type=\"module\"' && jest spec/ --verbose"
+  },
+  "author": "kibe",
+  "license": "ISC",
+  "husky": {
+    "hooks": {
+      "pre-commit": "standard --fix && npm test",
+      "pre-push": "npm test"
+    }
+  },
+  "standard": {
+    "env": [
+      "jest"
+    ],
+    "parser": "babel-eslint"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.10.5",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.5.9"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.11.0",
+    "@babel/preset-env": "^7.10.4",
+    "@shelf/jest-mongodb": "^1.2.1",
+    "babel-eslint": "^10.1.0",
+    "babel-jest": "^26.1.0",
+    "babylon": "^6.18.0",
+    "jest": "^26.1.0",
+    "json": "^9.0.6",
+    "nodemon": "^2.0.4",
+    "standard": "^14.3.4"
+  },
+  "config": {
+    "mongodbMemoryServer": {
+      "version": "latest"
+    }
+  },
+  "engine": {
+    "node": "14.3.0"
+  },
+  "type": "module"
+}
