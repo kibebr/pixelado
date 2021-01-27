@@ -25,7 +25,6 @@
   }
 
   loggedUser.set(null)
-
   $: {
     $location
     document.body.scrollTop = 0
@@ -314,7 +313,7 @@
 {/if}
 
 {#if $alert}
-  <div transition:fly='{{ duration: 100 }}' id='alert-box-wrapper'>
+  <div transition:fly='{{ duration: 100 }}' id='alert-box-wrapper' class='center-x'>
     <AlertBox text={$alert.text} type={$alert.type} />
   </div>
 {/if}

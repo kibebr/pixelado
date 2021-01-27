@@ -7,11 +7,11 @@ export const fetchSketchWithId = id => (promise({
   errorMessage: 'There was a problem while fetching the sketch.'
 }))()
 
-export const fetchSketches = promise({
-  url: `${SERVER_URI}/api/sketches`,
+export const fetchSketches = ({ sortBy }) => (promise({
+  url: `${SERVER_URI}/api/sketches?sort_by=${sortBy}`,
   type: 'GET',
   errorMessage: 'There was a problem while fetching the sketches.'
-})
+}))()
 
 export const sendVote = (sketchId, type, token) => (promise({
   url: `${SERVER_URI}/api/sketches/${sketchId}/votes/${type}`,

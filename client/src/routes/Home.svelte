@@ -23,20 +23,24 @@
     { value: 'popular', label: 'Popular' },
     { value: 'new', label: 'New' },
   ]
-  let selectedFilter = filterOptions[1]
+  let selectedFilter = 'popular'
 
   onMount(async () => {
-    sketches = await fetchSketches()
+    sketches = await fetchSketches({
+      sortBy: selectedFilter
+    })
     storedSketches.set(toObjFromId(sketches))
   })
 
-  const handleSelect = ({ detail }) => {
-    console.log(detail)
+  const selectFilter = async newFilter => {
+    selectedFilter = newFilter
+    sketches = await fetchSketches({
+      sortBy: selectedFilter
+    })
   }
 
   $: {
     for (const [id, canvas] of Object.entries(canvases)) {
-      console.log(canvas.width)
       paintAll('white')(canvas)
       setCanvasBoxes({
         size: $storedSketches[id].size.w,
@@ -143,11 +147,17 @@
   <div id='bar'>
     <div id='left' class='bar-div'>
       <Select 
-         items={filterOptions} 
-         selectedValue={selectedFilter}
+         items={[{
+         value: 'popular',
+         label: 'Popular'
+         }, {
+         value: 'new',
+         label: 'New'
+         }]} 
+         selectedValue={{ value: 'popular', label: 'Popular' }}
          isSearchable={false}
          isClearable={false}
-         on:select={handleSelect}></Select>
+         on:select={({ detail }) => selectFilter(detail.value)}></Select>
     </div>
     <div id='center' class='bar-div'>
       <div>
@@ -156,7 +166,7 @@
       </div>
     </div>
     <div id='right' class='bar-div'>
-      
+
     </div>
   </div>
   <section id='sketch-gallery'>
