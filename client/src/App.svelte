@@ -24,7 +24,6 @@
     })
   }
 
-  loggedUser.set(null)
   $: {
     $location
     document.body.scrollTop = 0

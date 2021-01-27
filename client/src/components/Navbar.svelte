@@ -8,6 +8,7 @@
   import { login, register } from '../services/SessionService.js'
   import { setCurrentSession } from '../utils/Session.js'
   import { fade } from 'svelte/transition'
+  import Select from 'svelte-select'
       
   let shouldShowNav
   let isMobileModalOpen = false

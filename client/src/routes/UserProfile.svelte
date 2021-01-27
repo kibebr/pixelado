@@ -75,9 +75,10 @@
   }
 
   #sidebar {
-    width: 155px;
+    position: relative;
+    width: auto;
+    margin-right: 20px;
     display: inline-block;
-    vertical-align: top;
   }
 
   #gallery {
@@ -86,6 +87,21 @@
     grid-column-gap: 25px;
     grid-row-gap: 25px;
     flex-grow: 1;
+  }
+
+  #log-off-wrapper {
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+  }
+
+  #log-off-wrapper>button {
+    width: 70px;
+    background-color: var(--color-red);
+  }
+
+  #drawings-sidebar {
+    margin-right: 20px;
   }
 
   #biography {
@@ -152,9 +168,14 @@
     </div>
     <div id='down'>
       <div id='sidebar'>
-        <p class='gallery-selection selected'>Drawings ({user.sketches.length})</p>
+        <p id='drawings-sidebar' class='gallery-selection selected'>Drawings ({user.sketches.length})</p>
         <p class='gallery-selection unavailable'>Voted</p>
         <p class='gallery-selection unavailable'>Collections</p>
+        {#if $loggedUser?.username === user.username}
+          <div id='log-off-wrapper'>
+            <button on:click={handleLogoff}>Log-off</button>
+          </div>
+        {/if}
       </div>
       <div id='gallery'>
         {#if user.sketches.length !== 0}
