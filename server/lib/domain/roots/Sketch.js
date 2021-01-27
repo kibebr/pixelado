@@ -1,7 +1,7 @@
 import { InvalidParamError, ActionOverperformedError } from '../../utils/errors/index.js'
 
 export default class Sketch {
-  constructor ({ id, author, title, size, boxes, votes, comments, dominantColors }) {
+  constructor ({ id, author, title, size, boxes, votes, comments, date, dominantColors }) {
     this.id = id
     this.author = author
     this.title = title
@@ -9,6 +9,7 @@ export default class Sketch {
     this.boxes = boxes
     this.votes = votes || {}
     this.comments = comments || []
+    this.date = date || 'NON-SPECIFIED'
     this.dominantColors = dominantColors
   }
 

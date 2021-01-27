@@ -1,22 +1,16 @@
 import MongoHelper from './helpers/mongo-helper.js'
 import mongodb from 'mongodb'
 import Sketch from '../../../domain/roots/Sketch.js'
+import { objectIdToDate } from './Utils.js'
 
 const { ObjectId } = mongodb
 const getSketchModel = async () => await MongoHelper.getCollection('sketches')
 
-export const compare = (a, b) => {
-  const aVotes = Sketch.getAllVotes(a)
-  const bVotes = Sketch.getAllVotes(b)
-
-  if (aVotes > bVotes) {
-    return -1
-  } else if (aVotes < bVotes) {
-    return 1
-  } else {
-    return 0
-  }
-}
+const persistanceToDomain = p => new Sketch({
+  ...p,
+  date: objectIdToDate(p._id),
+  id: p._id
+})
 
 export default class SketchRepository {
   insert = async sketch => {
@@ -28,18 +22,13 @@ export default class SketchRepository {
   loadAll = async query => {
     const sketchModel = await getSketchModel()
     const sketchesData = await sketchModel.find().toArray()
-    return sketchesData.map(sketchData => new Sketch({
-      ...sketchData,
-      id: sketchData._id
-    }))
+    return sketchesData.map(persistanceToDomain)
   }
 
   loadByPopularity = async query => {
     const sketchModel = await getSketchModel()
-    const sketchesData = await sketchModel.find().toArray()
 
-    // sketchesData.sort(compare)
-    const returned = await sketchModel
+    const data = await sketchModel
       .aggregate([
         {
           $addFields:
@@ -73,18 +62,12 @@ export default class SketchRepository {
       .sort({ totalVotes: -1 })
       .toArray()
 
-    console.log(returned)
-
-    return returned
+    return data.map(persistanceToDomain)
   }
 
   findById = async id => {
     const sketchModel = await getSketchModel()
-    const sketchData = await sketchModel.findOne({ _id: ObjectId(id) })
-    return sketchData && new Sketch({
-      ...sketchData,
-      id: sketchData._id
-    })
+    return persistanceToDomain(await sketchModel.findOne({ _id: ObjectId(id) }))
   }
 
   update = async sketch => {
