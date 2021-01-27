@@ -54,6 +54,9 @@ export default class Sketch {
     return 16
   }
 
+  static getAllVotes = sketch => Object.values(sketch.votes)
+    .reduce((total, type) => total + type.reduce((_total, { count }) => _total + count, 0), 0)
+
   static validate = sketch => {
     if (!sketch.author) {
       throw new InvalidParamError('author')

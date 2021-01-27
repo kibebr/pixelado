@@ -1,6 +1,7 @@
 import mongodb from 'mongodb'
 import MongoHelper from '../../../../lib/secondary-adapters/repositories/Mongo/helpers/mongo-helper.js'
 import SketchRepository from '../../../../lib/secondary-adapters/repositories/Mongo/SketchRepository.js'
+import { createValidSketch } from '../../../domain/roots/fixtures/createValidSketch.js'
 
 const { ObjectId } = mongodb
 let sketchModel
@@ -13,15 +14,15 @@ afterEach(async () => { await sketchModel.deleteMany({}) })
 afterAll(async () => { await MongoHelper.disconnect() })
 
 const sut = new SketchRepository()
-const sampleSketch = {
-  title: 'a beautiful sketch'
-}
 
 describe('Sketch Repository', () => {
   it('inserts a new sketch', async () => {
-    const result = await sut.insert(sampleSketch)
+    const sketch = createValidSketch({ title: 'tobefound' })
+    await sut.insert(sketch)
 
-    expect(result).toBe(true)
+    const allSketches = await sketchModel.find().toArray()
+
+    expect(() => allSketches.find(s => s.title === sketch.title)).toBeTruthy()
   })
 
   it('gets all the sketches', async () => {
@@ -34,6 +35,54 @@ describe('Sketch Repository', () => {
 
     expect(result[0].title).toBe('sketch1')
     expect(result[1].title).toBe('sketch2')
+  })
+
+  it('sort sketches by popularity', async () => {
+    const sketch1 = createValidSketch({ title: 'last' })
+    sketch1.addVote({
+      author: 'kibe',
+      type: 'claps',
+      count: 5
+    })
+    const sketch2 = createValidSketch({ title: 'first' })
+    sketch2.addVote({
+      author: 'kibe',
+      type: 'claps',
+      count: 10
+    })
+
+    await sketchModel.insertMany([sketch1, sketch2])
+
+    const result = await sut.loadByPopularity()
+    expect(result[0].title).toBe('first')
+    expect(result[1].title).toBe('last')
+  })
+
+  it('sort sketches by popularity', async () => {
+    const sketch1 = createValidSketch({ title: 'last' })
+    sketch1.addVote({
+      author: 'kibe',
+      type: 'claps',
+      count: 5
+    })
+    sketch1.addVote({
+      author: 'kibe',
+      type: 'ab',
+      count: 10
+    })
+
+    const sketch2 = createValidSketch({ title: 'first' })
+    sketch2.addVote({
+      author: 'kibe',
+      type: 'claps',
+      count: 10
+    })
+
+    await sketchModel.insertMany([sketch1, sketch2])
+
+    const result = await sut.loadByPopularity()
+    expect(result[0].title).toBe('last')
+    expect(result[1].title).toBe('first')
   })
 
   it('finds a sketch by its ID', async () => {

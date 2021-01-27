@@ -242,6 +242,23 @@ describe('Sketch Entity', () => {
       }
     })
   })
+
+  describe('Utils', () => {
+    describe('getAllVotes', () => {
+      it('gets all votes from a sketch', () => {
+        const sut = createValidSketch({
+          votes: {
+            claps: [{ count: 10 }, { count: 20 }],
+            hearts: [{ count: 30 }]
+          }
+        })
+
+        const votes = Sketch.getAllVotes(sut)
+
+        expect(votes).toBe(60)
+      })
+    })
+  })
 })
 
 // TODO: maybe use value objects or separate validations into functions for more test isolation

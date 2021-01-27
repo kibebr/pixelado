@@ -5,6 +5,19 @@ import Sketch from '../../../domain/roots/Sketch.js'
 const { ObjectId } = mongodb
 const getSketchModel = async () => await MongoHelper.getCollection('sketches')
 
+export const compare = (a, b) => {
+  const aVotes = Sketch.getAllVotes(a)
+  const bVotes = Sketch.getAllVotes(b)
+
+  if (aVotes > bVotes) {
+    return -1
+  } else if (aVotes < bVotes) {
+    return 1
+  } else {
+    return 0
+  }
+}
+
 export default class SketchRepository {
   insert = async sketch => {
     const sketchModel = await getSketchModel()
@@ -19,6 +32,19 @@ export default class SketchRepository {
       ...sketchData,
       id: sketchData._id
     }))
+  }
+
+  loadByPopularity = async query => {
+    const sketchModel = await getSketchModel()
+    const sketchesData = await sketchModel.find().toArray()
+
+    // sketchesData.sort(compare)
+    const returned = sketchModel
+      .find()
+      .sort({ 'votes.claps': 1, 'votes.ab': 1 })
+      .toArray()
+
+    return returned
   }
 
   findById = async id => {
