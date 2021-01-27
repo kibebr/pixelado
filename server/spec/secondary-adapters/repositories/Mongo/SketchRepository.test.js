@@ -63,12 +63,12 @@ describe('Sketch Repository', () => {
     sketch1.addVote({
       author: 'kibe',
       type: 'claps',
-      count: 5
+      count: 3
     })
     sketch1.addVote({
       author: 'kibe',
       type: 'ab',
-      count: 10
+      count: 3
     })
 
     const sketch2 = createValidSketch({ title: 'first' })
@@ -81,8 +81,8 @@ describe('Sketch Repository', () => {
     await sketchModel.insertMany([sketch1, sketch2])
 
     const result = await sut.loadByPopularity()
-    expect(result[0].title).toBe('last')
-    expect(result[1].title).toBe('first')
+    expect(result[0].title).toBe('first')
+    expect(result[1].title).toBe('last')
   })
 
   it('finds a sketch by its ID', async () => {

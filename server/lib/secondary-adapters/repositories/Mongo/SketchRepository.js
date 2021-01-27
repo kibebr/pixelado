@@ -39,10 +39,41 @@ export default class SketchRepository {
     const sketchesData = await sketchModel.find().toArray()
 
     // sketchesData.sort(compare)
-    const returned = sketchModel
-      .find()
-      .sort({ 'votes.claps': 1, 'votes.ab': 1 })
+    const returned = await sketchModel
+      .aggregate([
+        {
+          $addFields:
+          {
+            totalVotes:
+            {
+              $sum:
+              {
+                $map:
+                {
+                  input: { $objectToArray: '$votes' },
+                  as: 'x',
+                  in:
+                  {
+                    $reduce:
+                    {
+                      input: '$$x.v',
+                      initialValue: 0,
+                      in:
+                      {
+                        $add: ['$$value', '$$this.count']
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ])
+      .sort({ totalVotes: -1 })
       .toArray()
+
+    console.log(returned)
 
     return returned
   }
