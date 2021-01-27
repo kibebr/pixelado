@@ -85,6 +85,18 @@ describe('Sketch Repository', () => {
     expect(result[1].title).toBe('lastlast')
   })
 
+  it('sorts sketches by date', async () => {
+    const sketch1 = createValidSketch({ title: 'firstfirst' })
+    const sketch2 = createValidSketch({ title: 'lastlast' })
+
+    await sketchModel.insertMany([sketch1, sketch2])
+
+    const result = await sut.loadByDate()
+
+    expect(result[0].title).toBe('firstfirst')
+    expect(result[1].title).toBe('lastlast')
+  })
+
   it('finds a sketch by its ID', async () => {
     await sketchModel.insertOne({
       _id: new ObjectId('5ec9b3d308d15319690d5a09'),

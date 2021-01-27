@@ -1,0 +1,2 @@
+let g:test#javascript#jest#executable = 'jest --config ./jest.config.js'
+

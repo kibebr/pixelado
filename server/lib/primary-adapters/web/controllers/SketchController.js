@@ -79,7 +79,10 @@ export default class SketchController extends BaseController {
 
   getAll = async httpRequest => {
     try {
-      const result = await this.sketchService.findAll()
+      const result = await this.sketchService.findAll({
+        sortBy: httpRequest.query.sort_by
+      })
+      console.log(httpRequest)
 
       return {
         statusCode: 200,

@@ -25,6 +25,16 @@ export default class SketchRepository {
     return sketchesData.map(persistanceToDomain)
   }
 
+  loadByDate = async () => {
+    const sketchModel = await getSketchModel()
+    const sketchesData = await sketchModel
+      .find()
+      .sort({ _id: 1 })
+      .toArray()
+
+    return sketchesData.map(persistanceToDomain)
+  }
+
   loadByPopularity = async query => {
     const sketchModel = await getSketchModel()
 
