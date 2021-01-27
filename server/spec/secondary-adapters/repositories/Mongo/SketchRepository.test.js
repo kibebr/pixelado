@@ -53,7 +53,7 @@ describe('Sketch Repository', () => {
 
     await sketchModel.insertMany([sketch1, sketch2])
 
-    const result = await sut.loadByPopularity()
+    const result = await sut.load('popular', [0, 2])
     expect(result[0].title).toBe('firstfirst')
     expect(result[1].title).toBe('lastlast')
   })
@@ -80,7 +80,7 @@ describe('Sketch Repository', () => {
 
     await sketchModel.insertMany([sketch1, sketch2])
 
-    const result = await sut.loadByPopularity()
+    const result = await sut.load('popular', [0, 2])
     expect(result[0].title).toBe('firstfirst')
     expect(result[1].title).toBe('lastlast')
   })
@@ -91,10 +91,20 @@ describe('Sketch Repository', () => {
 
     await sketchModel.insertMany([sketch1, sketch2])
 
-    const result = await sut.loadByDate()
+    const result = await sut.load('date', [0, 2])
 
     expect(result[0].title).toBe('firstfirst')
     expect(result[1].title).toBe('lastlast')
+  })
+
+  it('skips and limits (pagination)', async () => {
+    const sketches = [...new Array(20)].map((_, i) => createValidSketch({ title: `sketch${i}` }))
+
+    await sketchModel.insertMany(sketches)
+
+    const result = await sut.load('date', [10, 10])
+
+    expect(result[0].title).toBe('sketch10')
   })
 
   it('finds a sketch by its ID', async () => {

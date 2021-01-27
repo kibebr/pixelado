@@ -16,6 +16,7 @@
   import Heart from '../assets/heart.svg'
   import Okay from '../assets/okay.svg'
 
+  let paginationRange = [0, 10]
   let sketches = null
   let canvases = {}
 
@@ -26,17 +27,19 @@
   let selectedFilter = 'popular'
 
   onMount(async () => {
-    sketches = await fetchSketches({
-      sortBy: selectedFilter
-    })
+    sketches = await fetchSketches(
+      'popular',
+      [0, 10]
+    )
     storedSketches.set(toObjFromId(sketches))
   })
 
   const selectFilter = async newFilter => {
     selectedFilter = newFilter
-    sketches = await fetchSketches({
-      sortBy: selectedFilter
-    })
+    sketches = await fetchSketches(
+      selectedFilter,
+      [0, 10]
+    )
   }
 
   $: {

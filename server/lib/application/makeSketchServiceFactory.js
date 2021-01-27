@@ -47,17 +47,13 @@ export const makeSketchServiceFactory = ({ SketchRepository }) => ({
     await SketchRepository.update(sketch)
   },
 
-  makeFindAll: ({ Presenter }) => async ({ sortBy }) => {
-    let sketches
-
-    if (sortBy === 'popular') {
-      sketches = await SketchRepository.loadByPopularity()
-    } else {
-      sketches = await SketchRepository.loadByDate()
-    }
+  makeFindAll: ({ Presenter }) => async (sortBy, paginationRange) => {
+    const sketches = await SketchRepository.load(sortBy, paginationRange)
 
     if (sketches) {
       return sketches.map(Presenter.toSketchDto)
+    } else {
+      return null
     }
   },
 

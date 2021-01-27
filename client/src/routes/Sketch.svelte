@@ -16,11 +16,6 @@
 
   let canvas
   let comment = ''
-  let totalVotes = {
-    claps: 0,
-    perfect: 0,
-    love: 0,
-  }
 
   onMount(async () => {
     if (!$storedSketches[params.id]) {

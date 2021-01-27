@@ -25,18 +25,9 @@ export default class SketchRepository {
     return sketchesData.map(persistanceToDomain)
   }
 
-  loadByDate = async () => {
+  load = async (sort, range) => {
     const sketchModel = await getSketchModel()
-    const sketchesData = await sketchModel
-      .find()
-      .sort({ _id: 1 })
-      .toArray()
-
-    return sketchesData.map(persistanceToDomain)
-  }
-
-  loadByPopularity = async query => {
-    const sketchModel = await getSketchModel()
+    const mongoSort = sort === 'popular' ? { totalVotes: -1 } : { _id: 1 }
 
     const data = await sketchModel
       .aggregate([
@@ -69,10 +60,17 @@ export default class SketchRepository {
           }
         }
       ])
-      .sort({ totalVotes: -1 })
-      .toArray()
+      .sort(mongoSort)
 
-    return data.map(persistanceToDomain)
+    if (range) {
+      await data
+        .skip(range[0])
+        .limit(range[1])
+    }
+
+    const dataArr = await data.toArray()
+
+    return dataArr.map(persistanceToDomain)
   }
 
   findById = async id => {

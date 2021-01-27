@@ -7,8 +7,8 @@ export const fetchSketchWithId = id => (promise({
   errorMessage: 'There was a problem while fetching the sketch.'
 }))()
 
-export const fetchSketches = ({ sortBy }) => (promise({
-  url: `${SERVER_URI}/api/sketches?sort_by=${sortBy}`,
+export const fetchSketches = (sortBy, paginationRange) => (promise({
+  url: `${SERVER_URI}/api/sketches?sort_by=${sortBy}&limit=${paginationRange[1]}&offset=${paginationRange[0]}`,
   type: 'GET',
   errorMessage: 'There was a problem while fetching the sketches.'
 }))()
