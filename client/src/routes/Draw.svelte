@@ -10,9 +10,9 @@
   import { getCurrentSession } from '../utils/Session.js'
   import { submitSketch } from '../services/SketchService.js'
   import { removeAllChildren } from '../utils/Elements.js'
-  import Pencil from '../assets/edit-button.svg'
+  import Pencil from '../assets/pencil.svg'
   import Eraser from '../assets/eraser.svg'
-  import Bucket from '../assets/paint-bucket.svg'
+  import Bucket from '../assets/bucket.svg'
   import Circle from '../assets/circle.svg'
 
   const canvasWidth = 480
@@ -25,7 +25,6 @@
   const sizey = 32
 
   const drawings = drawingStore.get() || [createDrawing()]
-  console.log(drawings)
 
   let selectedDrawing = drawings[0]
   let selectedLayer = selectedDrawing.layers[selectedDrawing.layers.length - 1]
@@ -42,13 +41,6 @@
     container.appendChild(canvas)
   }
 
-  const appendDrawing = drawing => {
-    /* removeAllChildren(container) */
-    drawing.layers.forEach(({ canvas }) => {
-      appendToContainer(canvas)
-    })
-  }
-
   onMount(() => {  
     // background color-changing animation
     document.body.classList.remove('towhite')
@@ -57,10 +49,6 @@
     // initializes color picker
     colorPicker = createColorPicker()
 
-    // for each canvas in the drawing layer, make sure to add the 'draw-canvas' CSS class to it, so they are positioned correctly
-    selectedDrawing.layers.forEach(({ canvas }) => {
-      canvas.classList.add('draw-canvas')
-    })
 
     // paints the background canvas (the chess thing)
     paintAll('grey')(backgroundCanvas)
@@ -70,16 +58,20 @@
       boxWidth, 
       boxHeight 
     })(backgroundCanvas)
-    setCanvasBoxes({ 
-      width: selectedLayer.grid.width,
-      height: selectedLayer.grid.height,
-      boxWidth, 
-      boxHeight 
-    })(Object.fromEntries(selectedLayer.grid.paintedBoxes))(selectedLayer)
 
     // appends the canvases in order
     appendToContainer(backgroundCanvas)
-    appendDrawing(selectedDrawing)
+    drawings.forEach(d => {
+      d.layers.forEach(l => {
+        l.canvas = createCanvas({
+          width: canvasWidth,
+          height: canvasHeight
+        })
+
+        l.canvas.classList.add('draw-canvas')
+        container.appendChild(l.canvas)
+      })
+    })
   })
 
   onDestroy(() => {
@@ -121,7 +113,6 @@
       }
     } 
     
-    console.log(drawings)
     clearCanvas(selectedLayer.canvas)
     setCanvasBoxes({ boxWidth, boxHeight })(Object.fromEntries(selectedLayer.grid.paintedBoxes))(selectedLayer.canvas)
   }

@@ -7,6 +7,17 @@ export const createGrid = ({ width, height, paintedBoxes } = {}) => ({
   height: height || 32,
 })
 
+export const createDrawing = () => ({
+  width: 32,
+  height: 32,
+  layers: [{
+    grid: createGrid({
+      width: 32,
+      height: 32
+    })
+  }]
+})
+
 export const paint = ({ x, y, color, shouldReplace }) => grid => {
   const coords = `${x},${y}`
 
