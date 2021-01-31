@@ -18,7 +18,8 @@
   const canvasWidth = 480
   const canvasHeight = 480
 
-  const backgroundLayer = createCanvas({ width: canvasWidth, height: canvasHeight })
+  const backgroundCanvas = createCanvas({ width: canvasWidth, height: canvasHeight })
+  backgroundCanvas.classList.add('draw-canvas')
   const createDrawing = () => ({
     width: 32,
     height: 32,
@@ -40,7 +41,7 @@
   const drawings = drawingStore.get() || [createDrawing()]
 
   let selectedDrawing = drawings[0]
-  let selectedLayer = selectedDrawing.layers[0]
+  let selectedLayer = selectedDrawing.layers[selectedDrawing.layers.length - 1]
   let isMousePressing = false
   let colorPicker
   let container
@@ -50,35 +51,48 @@
   let boxWidth = (canvasWidth / sizex)
   let boxHeight = (canvasWidth / sizey)
 
+  const appendToContainer = canvas => {
+    container.appendChild(canvas)
+  }
+
   const appendDrawing = drawing => {
     /* removeAllChildren(container) */
-
     drawing.layers.forEach(({ canvas }) => {
-      container.appendChild(canvas)
+      appendToContainer(canvas)
     })
   }
 
   onMount(() => {  
+    // background color-changing animation
     document.body.classList.remove('towhite')
     document.body.classList.add('todark')
+
+    // initializes color picker
     colorPicker = createColorPicker()
+
+    // for each canvas in the drawing layer, make sure to add the 'draw-canvas' CSS class to it, so they are positioned correctly
     selectedDrawing.layers.forEach(({ canvas }) => {
       canvas.classList.add('draw-canvas')
     })
-    appendDrawing(selectedDrawing)
-    paintAll('grey')(backgroundLayer)
+
+    // paints the background canvas (the chess thing)
+    paintAll('grey')(backgroundCanvas)
     renderChess({ 
       width: selectedLayer.grid.width, 
       height: selectedLayer.grid.height,
       boxWidth, 
       boxHeight 
-    })(backgroundLayer)
+    })(backgroundCanvas)
     setCanvasBoxes({ 
       width: selectedLayer.grid.width,
       height: selectedLayer.grid.height,
       boxWidth, 
       boxHeight 
-    })(Object.fromEntries(selectedLayer.grid.paintedBoxes))(layers[1].canvas)
+    })(Object.fromEntries(selectedLayer.grid.paintedBoxes))(selectedLayer)
+
+    // appends the canvases in order
+    appendToContainer(backgroundCanvas)
+    appendDrawing(selectedDrawing)
   })
 
   onDestroy(() => {
@@ -119,7 +133,7 @@
           })(selectedLayer.grid)
       }
     } 
-
+    
     clearCanvas(selectedLayer.canvas)
     setCanvasBoxes({ boxWidth, boxHeight })(Object.fromEntries(selectedLayer.grid.paintedBoxes))(selectedLayer.canvas)
   }
@@ -134,7 +148,7 @@
     } else {
       submitSketch({
         sketch: {
-          title: 'test',
+          title: 'my beautiful sketch',
           boxes: Object.fromEntries(grid.paintedBoxes),
           size: grid.size.width,
           dominantColors: ['red']

@@ -64,15 +64,22 @@
       return alert.addAlert({ text: 'Oops, you have to be logged in to vote!', type: 'error' })
     }
 
-    const index = $storedSketches[params.id].votes[type].findIndex(({ author }) => author === $loggedUser.username)
+    const index = $storedSketches[params.id].votes[type]?.findIndex(({ author }) => author === $loggedUser.username)
 
-    if ($storedSketches[params.id].votes[type][index].count >= 10) {
+    if (index && $storedSketches[params.id].votes[type][index].count >= 10) {
       return alert.addAlert({ text: 'You voted too many times!', type: 'error' })
     }
 
     sendVote(params.id, type, $loggedUser.token)
       .then(() => {
-        $storedSketches[params.id].votes[type][index].count += 1
+        if (index) {
+          $storedSketches[params.id].votes[type] = [{
+            author: $loggedUser.username,
+            count: 1
+          }]
+        } else {
+          $storedSketches[params.id].votes[type][index].count += 1
+        }
       })
       .catch(err => {
         alert.addAlert({ text: err, type: 'error' })

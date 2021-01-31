@@ -63,9 +63,6 @@
   }
 
   #bar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     margin-bottom: 40px;
   }
 
@@ -147,7 +144,7 @@
 </style>
 
 <div id='home-view'>
-  <div id='bar'>
+  <div id='bar' class='flex align-center justify-center'>
     <div id='left' class='bar-div'>
       <Select 
          items={[{

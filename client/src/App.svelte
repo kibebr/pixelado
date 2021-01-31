@@ -62,6 +62,18 @@
     width: auto;
   }
 
+  :global(.flex) {
+    display: flex !important;
+  }
+
+  :global(.align-center) {
+    align-items: center;
+  }
+
+  :global(.justify-center) {
+    justify-content: center;
+  }
+
   :global(.center-x) {
     left: 50%;
     transform: translateX(-50%);

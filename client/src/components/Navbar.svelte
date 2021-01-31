@@ -33,6 +33,12 @@
     z-index: 2;
     text-align: right;
   }
+
+  nav>* {
+    position: absolute;
+    bottom: 0;
+  }
+
   button {
     color: white;
   }
@@ -44,8 +50,6 @@
   }
 
   #nav-btns {
-    position: absolute;
-    bottom: 0;
     right: 70px;
   }
 
@@ -62,10 +66,8 @@
   }
 
   #nav-box {
-    position: absolute;
     left: 70px;
     cursor: pointer;
-    bottom: 0;
   }
 
   #mobile-nav {
@@ -105,12 +107,12 @@
   <Modal>
     <div id='mobile-nav'>
       <span>Home</span>
-      <span>Log-in</span>
+      <span on:click={() => isLoginModalOpen.set(true)}>Log-in</span>
     </div>
   </Modal>
 {/if}
 
-<nav>
+<nav class='flex justify-center align-center'>
   {#if $location !== '/draw'}
     <div id='nav-box' on:click={handleBoxClick}>
       <div id='nav-logo' class='gradient'></div>

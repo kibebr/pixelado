@@ -1,5 +1,4 @@
 <script>
-  import { getRandomPastelColor } from '../utils/Colors.js'
   import { push } from 'svelte-spa-router'
 
   export let author
@@ -9,31 +8,33 @@
 
 <style>
   .comment-box {
-    text-align: left;
-    padding: 15px;
-    border-radius: 5px;
-    transition: transform 0.05s;
-    border: 2px solid rgba(0, 0, 0, 0.1);
-    background-color: white;
+    height: 120px;
+    outline: 1px solid red;
   }
 
-  .content {
-    font-size: 1em;
+  .profile-pic-wrapper {
+    height: 100%;
+    width: 40px;
   }
 
-  .comment-box:hover {
-    transform: scale(1.01);
+  h4 {
+    margin-top: 0;
   }
 
-  .comment-author {
-    font-size: 1.2em;
-    display: block;
-    font-weight: bold;
-    margin-bottom: 10px;
+  .profile-pic {
+    width: 16px;
+    height: 16px;
   }
 </style>
 
-<div class='comment-box'>
-  <a href='#/user/{author}'><span class='comment-author'>{author}</span></a>
-  <span class='content'>{content}</span>
+<div class='comment-box flex'>
+  <div class='profile-pic-wrapper'>
+    <div class='profile-pic'>
+      test
+    </div>
+  </div>
+  <div>
+    <h4>{author}</h4>
+    <p>{content}</p>
+  </div>
 </div>
