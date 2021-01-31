@@ -20,7 +20,7 @@ module.exports = merge(common, {
       use: {
         loader: 'svelte-loader',
         options: {
-          emitCss: false,
+          emitCss: true,
           hotReload: false
         }
       }

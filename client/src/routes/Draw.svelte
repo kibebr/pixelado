@@ -2,7 +2,7 @@
   import { onMount, onDestroy } from 'svelte'
   import { createColorPicker } from '../utils/ColorPicker.js'
   import { createCanvas, clearCanvas, paintAll, renderChess, getPosRelativeToCanvas, getCoordinatesFromPos, setCanvasBoxes } from '../utils/Canvas.js'
-  import { createGrid, paint, _delete, flood } from '../utils/Grid.js'
+  import { createGrid, createDrawing, paint, _delete, flood } from '../utils/Grid.js'
   import { debounce } from '../utils/Utils.js'
   import { pipe } from '../utils/FP.js'
   import { push } from 'svelte-spa-router'
@@ -20,20 +20,6 @@
 
   const backgroundCanvas = createCanvas({ width: canvasWidth, height: canvasHeight })
   backgroundCanvas.classList.add('draw-canvas')
-  const createDrawing = () => ({
-    width: 32,
-    height: 32,
-    layers: [{
-      canvas: createCanvas({
-        width: canvasWidth,
-        height: canvasHeight
-      }),
-      grid: createGrid({
-        width: 32,
-        height: 32
-      })
-    }]
-  })
 
   const sizex = 32
   const sizey = 32

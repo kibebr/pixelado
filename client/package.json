@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kibebr/pixel-sketch.git"
+    "url": "git+https://github.com/kibebr/pixelado.git"
   },
   "keywords": [],
   "author": "",
@@ -34,7 +34,7 @@
     "style-loader": "^2.0.0",
     "svelte": "^3.31.0",
     "svelte-inline-svg": "^1.0.5",
-    "svelte-loader": "github:smittyvb/svelte-loader#update-virtual-modules",
+    "svelte-loader": "^3.0.0",
     "svelte-select": "^3.16.1",
     "svelte-spa-router": "^3.1.0",
     "svg-inline-loader": "^0.8.2",
