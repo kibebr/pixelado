@@ -39,6 +39,7 @@
   const sizey = 32
 
   const drawings = drawingStore.get() || [createDrawing()]
+  console.log(drawings)
 
   let selectedDrawing = drawings[0]
   let selectedLayer = selectedDrawing.layers[selectedDrawing.layers.length - 1]
@@ -134,6 +135,7 @@
       }
     } 
     
+    console.log(drawings)
     clearCanvas(selectedLayer.canvas)
     setCanvasBoxes({ boxWidth, boxHeight })(Object.fromEntries(selectedLayer.grid.paintedBoxes))(selectedLayer.canvas)
   }

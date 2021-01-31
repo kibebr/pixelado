@@ -20,25 +20,41 @@ const createDrawingStorer = () => {
 
   return {
     subscribe,
-    save: drawing => {
-      return null
+    save: drawings => {
+      // immutably create a new drawings object, but with the canvas removed and the layers' grid ready to be stringified (Map can't be stringified)
+      const toStringify = drawings.map(drawing => ({
+        ...drawing,
+        layers: drawing.layers.map(l => ({
+          grid: {
+            width: l.grid.width,
+            height: l.grid.height,
+            paintedBoxes: [...l.grid.paintedBoxes]
+          }
+        }))
+      }))
+      
+      console.log(toStringify)
+
+      localStorage.setItem('savedDrawings', JSON.stringify(toStringify))
       // localStorage.setItem('savedGrid', JSON.stringify({
       //   paintedBoxes: [...grid.paintedBoxes],
       //   size: grid.size
       // }))
     },
     get: () => {
-      return null
-      // const parsed = JSON.parse(localStorage.getItem('savedGrid'))
+      const parsed = JSON.parse(localStorage.getItem('savedDrawings'))
 
-      // if (parsed) {
-      //   return { 
-      //     paintedBoxes: new Map(parsed.paintedBoxes),
-      //     size: parsed.size
-      //   }
-      // } else {
-      //   return null
-      // }
+      if (parsed) {
+        parsed.forEach(p => {
+          p.layers.forEach(l => {
+            l.grid.paintedBoxes = new Map(l.grid.paintedBoxes)
+          })
+        })
+      } else {
+        return null
+      }
+
+      return parsed
     }
   }
 }
