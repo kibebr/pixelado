@@ -30,7 +30,6 @@
     -webkit-overflow-scrolling: touch;
     margin: 0 auto;
     margin-top: 100px;
-    padding-bottom: 20px;
     overflow: auto;
     color: black;
   }

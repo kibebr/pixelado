@@ -137,12 +137,6 @@
     transform: scale(0.95);
   }
 
-  :global(button:active) {
-    top: 2px;
-    color: black !important;
-    background-color: #ffdd00 !important;
-  }
-
   :global(a) {
     color: inherit;
     text-decoration: none;
@@ -239,24 +233,6 @@
     height: 10px;
   }
 
-  #color-bottom {
-    bottom: 0;
-    width: 100%;
-    height: 10px;
-  }
-
-  #color-left {
-    left: 0;
-    width: 10px;
-    height: 100%;
-  }
-
-  #color-right {
-    right: 0;
-    height: 100%;
-    width: 10px;
-  }
-
   :global(.todark) {
     animation: todark 0.5s;
     animation-fill-mode: forwards;
@@ -307,9 +283,6 @@
 
 {#if $location !== '/draw'}
   <div id='color' class='gradient colors'></div>
-  <div id='color-bottom' class='gradient colors'></div>
-  <div id='color-left' class='gradient colors'></div>
-  <div id='color-right' class='gradient colors'></div>
 {/if}
 
 <Navbar />
