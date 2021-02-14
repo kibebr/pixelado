@@ -24,6 +24,16 @@
     })
   }
 
+  onMount(() => {
+    document.body.addEventListener('mousedown', () => {
+      document.body.classList.add('using-mouse')
+    })
+
+    document.body.addEventListener('keydown', event => {
+      event.keyCode === 9 && document.body.classList.remove('using-mouse')
+    })
+  })
+
   $: {
     $location
     document.body.scrollTop = 0
@@ -42,6 +52,14 @@
   
   :global(*) {
     box-sizing: border-box;
+  }
+
+  :global(:focus) {
+    outline: #08f auto 2px;
+  }
+
+  :global(body.using-mouse :focus) {
+    outline: none;
   }
 
   #alert-box-wrapper {
@@ -106,7 +124,6 @@
   :global(button, textarea, input) {
     font-family: inherit;
     border: 0px;
-    outline: none;
     font-size: 1.1em;
     border-radius: 3px;
   }
