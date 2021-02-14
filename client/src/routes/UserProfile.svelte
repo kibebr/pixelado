@@ -2,6 +2,7 @@
   import { push } from 'svelte-spa-router'
   import { onMount } from 'svelte'
   import { fetchUserWithUsername } from '../services/UserService.js'
+  import SketchContainer from '../components/SketchContainer.svelte'
   import SpinningSquare from '../components/SpinningSquare.svelte'
   import { jump } from '../utils/svelteCustomTransitions.js'
   import { createCanvas, setCanvasBoxes, paintAll } from '../utils/Canvas.js'
@@ -14,7 +15,6 @@
   export let params = {}
     
   let user
-  let canvases = {}
   let sketchesById = {}
 
   const handleLogoff = () => {
@@ -30,16 +30,6 @@
     sketchesById = toObjFromId(user.sketches)
   })
 
-  $: {
-    for (const [id, canvas] of Object.entries(canvases)) {
-      paintAll('white')(canvas)
-      setCanvasBoxes({
-        size: sketchesById[id].size.w,
-        boxWidth: canvas.width / sketchesById[id].size.w,
-        boxHeight: canvas.height / sketchesById[id].size.h
-      })(sketchesById[id].boxes)(canvas)
-    }
-  }
 </script>
 
 <style>
@@ -180,9 +170,7 @@
       <div id='gallery'>
         {#if user.sketches.length !== 0}
           {#each user.sketches as sketch}
-            <a href='#/sketch/{sketch.id}'>
-              <canvas in:jump='{{ duration: 30 }}' class='opacity-effect' width=224 height=224 bind:this={canvases[sketch.id]}></canvas>
-            </a>
+            <SketchContainer sketch={sketch} />
           {/each}
         {:else}
           <p class='gallery-selection'>Seems like this user hasn't posted anything yet!</p>

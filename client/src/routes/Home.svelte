@@ -1,6 +1,7 @@
 <script>
   import SpinningSquare from '../components/SpinningSquare.svelte'
   import LoginRegisterModal from '../components/LoginRegisterModal.svelte'
+  import SketchContainer from '../components/SketchContainer.svelte'
   import { fly } from 'svelte/transition'
   import { jump } from '../utils/svelteCustomTransitions.js'
   import { onMount } from 'svelte'
@@ -32,6 +33,7 @@
       [0, 10]
     )
     storedSketches.set(toObjFromId(sketches))
+    console.log($storedSketches)
   })
 
   const selectFilter = async newFilter => {
@@ -104,35 +106,6 @@
     grid-row-gap: 50px;
   }
 
-  .sketch-container {
-    text-align: center;
-  }
-
-  .sketch-title {
-    margin-bottom: 10px;
-  }
-
-  .icon {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-  }
-
-  .made-by {
-    float: left;
-    color: var(--color-darkgrey);
-    display: block;
-  }
-
-  .votes {
-    float: right;
-    text-align: center;
-  }
-
-  .sketch-info {
-    margin-top: 5px;
-  }
-
   @media only screen and (max-width: 541px) {
     #sketch-gallery {
       padding-top: 50px;
@@ -172,34 +145,7 @@
   <section id='sketch-gallery'>
     {#if sketches}
       {#each sketches as sketch}
-        <div transition:jump='{{ duration: 60 }}' class='sketch-container'>
-          <p class='sketch-title'>{sketch.title}</p>
-          <a href='#/sketch/{sketch.id}'>
-            <canvas width=224 height=224 class='opacity-effect' bind:this={canvases[sketch.id]}></canvas>
-          </a>
-          <div class='sketch-info'>
-            <div class='votes'>
-              {#if sketch.votes.claps}
-                <div class='icon icon-jump'>
-                  {@html Clap}
-                </div>
-              {/if}
-              {#if sketch.votes.hearts}
-                <div class='icon icon-jump'>
-                  {@html Heart}
-                </div>
-              {/if}
-              {#if sketch.votes.okays}
-                <div class='icon icon-jump'>
-                  {@html Okay}
-                </div>
-              {/if}
-            </div>
-            <a href='#/user/{sketch.author}'>
-              <span class='made-by'>by {sketch.author}</span>
-            </a>
-          </div>
-        </div>
+        <SketchContainer sketch={sketch} />
       {/each}
     {:else}
       <div class='absolute-center'>
