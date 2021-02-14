@@ -5,7 +5,7 @@
   import { fly } from 'svelte/transition'
   import { jump } from '../utils/svelteCustomTransitions.js'
   import { onMount } from 'svelte'
-  import { createCanvas, setCanvasBoxes, paintAll } from '../utils/Canvas.js'
+  import { createCanvas } from '../utils/Canvas.js'
   import { createGradientFromSketch } from '../utils/Colors.js'
   import { fetchSketches } from '../services/SketchService.js'
   import { push } from 'svelte-spa-router'
@@ -13,13 +13,9 @@
   import { createSketchGradient } from '../utils/Elements.js'
   import Select from 'svelte-select'
   import { toObjFromId, getVotes } from '../utils/Utils.js'
-  import Clap from '../assets/clap.svg'
-  import Heart from '../assets/heart.svg'
-  import Okay from '../assets/okay.svg'
 
   let paginationRange = [0, 10]
   let sketches = null
-  let canvases = {}
 
   const filterOptions = [
     { value: 'popular', label: 'Popular' },
@@ -42,17 +38,6 @@
       selectedFilter,
       [0, 10]
     )
-  }
-
-  $: {
-    for (const [id, canvas] of Object.entries(canvases)) {
-      paintAll('white')(canvas)
-      setCanvasBoxes({
-        size: $storedSketches[id].size.w,
-        boxWidth: canvas.width / $storedSketches[id].size.w,
-        boxHeight: canvas.height / $storedSketches[id].size.h
-      })($storedSketches[id].boxes)(canvas)
-    }
   }
 </script>
 
