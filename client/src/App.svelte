@@ -164,12 +164,6 @@
     padding: 100px 70px 100px 70px;
   }
 
-  :global(.clickable:active) {
-    background-color: #ffdd00 !important;
-    border-bottom: 3px solid black;
-    color: black !important;
-  }
-
   :global(.sketch) {
     cursor: pointer;
     display: inline-block;
@@ -210,11 +204,6 @@
   :global(.link) {
     color: #255EB8;
     text-decoration: underline;
-  }
-
-  :global(.link:active) {
-    text-decoration: none;
-    border-bottom: 3px solid black !important;
   }
 
   :global(.link:hover) {
