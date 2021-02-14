@@ -31,6 +31,9 @@
     margin: 0 auto;
     margin-top: 100px;
     overflow: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     color: black;
   }
 

@@ -178,10 +178,6 @@
     opacity: 0.75;
   }
 
-  :global(.shadowed) {
-    border-bottom: 3px solid black;
-}
-
   :global(.clickable) {
     cursor: pointer;
   }
@@ -230,7 +226,7 @@
 
   .colors {
     position: fixed;
-    z-index: 200;
+    z-index: 99;
   }
 
   #color {
