@@ -117,6 +117,7 @@
     background-color: white;
     /* font-family: 'Jost'; */
     font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    font-family: 'Jost';
     margin: 0;
     color: #1A202C;
   }

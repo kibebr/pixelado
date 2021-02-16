@@ -1,7 +1,14 @@
 <script>
   import { onMount, onDestroy } from 'svelte'
   import { createColorPicker } from '../utils/ColorPicker.js'
-  import { createCanvas, clearCanvas, paintAll, renderChess, getPosRelativeToCanvas, getCoordinatesFromPos, setCanvasBoxes } from '../utils/Canvas.js'
+  import { 
+    createCanvas, 
+    clearCanvas,
+    paintAll, 
+    renderChess, 
+    getPosRelativeToCanvas, 
+    getCoordinatesFromPos, 
+    setCanvasBoxes } from '../utils/Canvas.js'
   import { createGrid, createDrawing, paint, _delete, flood } from '../../../core/Grid.js'
   import { debounce } from '../utils/Utils.js'
   import { pipe } from '../utils/FP.js'
@@ -21,9 +28,6 @@
   const backgroundCanvas = createCanvas({ width: canvasWidth, height: canvasHeight })
   backgroundCanvas.classList.add('draw-canvas')
 
-  const sizex = 32
-  const sizey = 32
-
   const drawings = drawingStore.get() || [createDrawing()]
 
   let selectedDrawing = drawings[0]
@@ -33,9 +37,9 @@
   let container
   let size
   let state = 'PAINT'
-  let scale = 1
-  let boxWidth = (canvasWidth / sizex)
-  let boxHeight = (canvasWidth / sizey)
+  console.log(selectedLayer.grid.width)
+  let boxWidth = (canvasWidth / selectedLayer.grid.width)
+  let boxHeight = (canvasWidth / selectedLayer.grid.height)
 
   const appendToContainer = canvas => {
     container.appendChild(canvas)
@@ -48,7 +52,6 @@
 
     // initializes color picker
     colorPicker = createColorPicker()
-
 
     // paints the background canvas (the chess thing)
     paintAll('grey')(backgroundCanvas)
@@ -142,6 +145,7 @@
         })
     }
   }
+
 </script>
 
 <style>
@@ -219,6 +223,10 @@
     <div class='a'>1</div>
     +
   </div>
+  <span>
+    <input />
+    x
+  </span>
   <div id='side-bar'>
     <a href='#/'>
       <div class='side-bar-square'>
@@ -239,6 +247,7 @@
     </div>
   </div>
   <div id='color-picker'></div>
+  <h1>my beautiful drawing</h1>
   <div 
        id='container' 
        bind:this={container} 

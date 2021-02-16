@@ -17,6 +17,7 @@ const createAlert = timeout => {
 
 const createDrawingStorer = () => {
   const { subscribe, set } = writable(null)
+  localStorage.setItem('savedDrawings', null)
 
   return {
     subscribe,
@@ -33,8 +34,6 @@ const createDrawingStorer = () => {
         }))
       }))
       
-      console.log(toStringify)
-
       localStorage.setItem('savedDrawings', JSON.stringify(toStringify))
       // localStorage.setItem('savedGrid', JSON.stringify({
       //   paintedBoxes: [...grid.paintedBoxes],

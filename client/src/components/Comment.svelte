@@ -9,12 +9,17 @@
 <style>
   .comment-box {
     height: 120px;
-    outline: 1px solid red;
+    background: white;
+    border-radius: 7px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    padding: 12px;
   }
 
-  .profile-pic-wrapper {
-    height: 100%;
-    width: 40px;
+  .comment-info-wrapper {
+    display: flex;
+    flex-direction: row;
+    height: 35px;
+    align-items: center;
   }
 
   h4 {
@@ -22,19 +27,20 @@
   }
 
   .profile-pic {
-    width: 16px;
-    height: 16px;
+    width: 32px;
+    height: 32px;
+    background: pink;
+    border-radius: 50%;
+    margin-right: 10px;
   }
 </style>
 
-<div class='comment-box flex'>
-  <div class='profile-pic-wrapper'>
-    <div class='profile-pic'>
-      test
-    </div>
+<div class='comment-box'>
+  <div class='comment-info-wrapper'>
+    <div class='profile-pic'></div>
+    <span>{author}</span>
   </div>
   <div>
-    <h4>{author}</h4>
-    <p>{content}</p>
+    <p>Oh man, that looks really nice! How did you make it?</p>
   </div>
 </div>
