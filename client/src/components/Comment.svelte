@@ -1,4 +1,5 @@
 <script>
+  import ProfilePicture from './ProfilePicture.svelte'
   import { push } from 'svelte-spa-router'
 
   export let author
@@ -27,18 +28,16 @@
     margin-top: 0;
   }
 
-  .profile-pic {
-    width: 32px;
-    height: 32px;
-    background: pink;
-    border-radius: 50%;
+  .profile-pic-wrapper {
     margin-right: 10px;
   }
 </style>
 
 <div class='comment-box'>
   <div class='comment-info-wrapper'>
-    <div class='profile-pic'></div>
+    <div class='profile-pic-wrapper'>
+      <ProfilePicture width='32px' height='32px' />
+    </div>
     <a href='#/user/{author}'>
       <span>{author}</span>
     </a>

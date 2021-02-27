@@ -11,7 +11,7 @@
   import Heart from '../assets/heart.svg'
   import Okay from '../assets/okay.svg'
   import Edit from '../assets/edit.svg'
-  import ProfilePic from '../public/defaultprofilepic.jpg'
+  import ProfilePicture from '../components/ProfilePicture.svelte'
 
   export let params = {}
     
@@ -39,21 +39,6 @@
 
   #profile-card {
     margin: auto;
-  }
-
-  #profile-pic {
-    position: relative;
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    background-color: black;
-    display: inline-block;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    transition: opacity 0.3s;
-  }
-
-  #profile-pic:hover {
-    opacity: 0.8;
   }
 
   #edit-icon {
@@ -152,7 +137,7 @@
 <section id='profile-view'>
   {#if user}
     <div id='profile-card'>
-      <img src={ProfilePic} id='profile-pic' alt='Default profile picture.' />
+      <ProfilePicture width='110px' height='110px' />
       <div id='profile-info'>
         <span id='username' style='color: {user.accentColor}'>{user.username}</span>
         <p id='biography'>{user.biography}<p>
