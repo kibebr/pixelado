@@ -26,6 +26,11 @@ module.exports = {
       }
     }, {
       test: /.m?js$/, type: 'javascript/auto', resolve: { fullySpecified: false }
+    }, {
+      test: /\.jpg$/,
+      use: {
+        loader: 'url-loader'
+      }
     }]
   }
 }

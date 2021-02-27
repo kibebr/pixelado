@@ -131,7 +131,7 @@
 
   #box {
     margin: 0 auto;
-    margin-top: -5px;
+    margin-top: 20px;
     width: 480px;
     padding: 10px;
     border-radius: 5px;
@@ -155,7 +155,6 @@
   }
 
   #sketch-comments {
-    margin-top: 20px;
   }
 
   .comment-wrapper {

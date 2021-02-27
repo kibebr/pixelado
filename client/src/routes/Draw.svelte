@@ -46,10 +46,6 @@
   }
 
   onMount(() => {  
-    // background color-changing animation
-    document.body.classList.remove('towhite')
-    document.body.classList.add('todark')
-
     // initializes color picker
     colorPicker = createColorPicker()
 

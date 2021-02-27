@@ -20,6 +20,7 @@
     flex-direction: row;
     height: 35px;
     align-items: center;
+    font-weight: bold;
   }
 
   h4 {
@@ -38,9 +39,11 @@
 <div class='comment-box'>
   <div class='comment-info-wrapper'>
     <div class='profile-pic'></div>
-    <span>{author}</span>
+    <a href='#/user/{author}'>
+      <span>{author}</span>
+    </a>
   </div>
   <div>
-    <p>Oh man, that looks really nice! How did you make it?</p>
+    <p>{content}</p>
   </div>
 </div>
