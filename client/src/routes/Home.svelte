@@ -112,9 +112,7 @@
 
     #sketch-gallery {
       padding-top: 50px;
-      justify-items: center;
       justify-content: center;
-      align-content: center;
     }
   }
 </style>

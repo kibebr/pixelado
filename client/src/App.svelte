@@ -282,6 +282,12 @@
       display: none;
     }
   }
+
+  @media screen and (max-width: 700px) {
+    #body {
+      padding: 20px;
+    }
+  }
 </style>
 
 {#if $location !== '/draw'}

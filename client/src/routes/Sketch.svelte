@@ -14,6 +14,11 @@
 
   export let params = {}
 
+  const small = document.body.clientWidth < 700
+
+  let canvasWidth = small ? 224 : 527
+  let canvasHeight = small ? 224 : 527
+
   let canvas
   let comment = ''
 
@@ -132,7 +137,7 @@
   #box {
     margin: 0 auto;
     margin-top: 20px;
-    width: 480px;
+    width: 60%;
     padding: 10px;
     border-radius: 5px;
     text-align: center;
@@ -166,6 +171,12 @@
     font-size: 0.4em;
     color: rgba(0, 0, 0, 0.4);
   }
+
+  @media screen and (max-width: 700px) {
+    #box {
+      width: 100%;
+    }
+  }
 </style>
 
 <div id='sketch-view'>
@@ -174,7 +185,7 @@
       {$storedSketches[params.id].author}
       <h2 id='sketch-title'>{$storedSketches[params.id].title}</h2>
       <div in:jump='{{ duration: 60 }}'>
-        <canvas width=576 height=576 bind:this={canvas}></canvas>
+        <canvas width={`${canvasWidth}px`} height={`${canvasHeight}px`} bind:this={canvas}></canvas>
       </div>
       <div id='box'>
         <div id='votes'>

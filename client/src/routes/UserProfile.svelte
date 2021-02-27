@@ -72,16 +72,13 @@
     margin-right: 20px;
   }
 
-  p {
-    margin: 10px;
-  }
-
   #gallery {
     display: grid;
     grid-template-columns: repeat(auto-fit, 224px);
     grid-column-gap: 25px;
     grid-row-gap: 25px;
     flex-grow: 1;
+    margin-left: 20px;
   }
 
   span {
@@ -127,8 +124,14 @@
     #sidebar {
       flex-direction: row;
       flex-wrap: nowrap;
+      width: 100%;
+      justify-content: center;
       align-items: baseline;
       margin-right: 0;
+    }
+
+    .unavailable {
+      display: none;
     }
 
     .gallery-selection {
@@ -147,6 +150,11 @@
 
     #profile-img-wrapper {
       margin-right: 0;
+    }
+
+    #gallery {
+      justify-content: center;
+      margin-left: 0;
     }
   }
 </style>
