@@ -78,6 +78,11 @@
   }
 
   #center {
+    display: flex;
+    flex-direction: flex-row;
+    flex-wrap: no-wrap;
+    flex: 1;
+    flex-shrink: 0;
     justify-content: center;
   }
 
@@ -95,6 +100,16 @@
   }
 
   @media only screen and (max-width: 541px) {
+    #left {
+      justify-content: center;
+    }
+    #right {
+      display: none;
+    }
+    #center {
+      display: none;
+    }
+
     #sketch-gallery {
       padding-top: 50px;
       justify-items: center;
@@ -123,7 +138,6 @@
     <div id='center' class='bar-div'>
       <div>
         <span class='bar-selection-text selected'>Drawings</span>
-        <span class='bar-selection-text unavailable'>Tournaments</span>
       </div>
     </div>
     <div id='right' class='bar-div'>

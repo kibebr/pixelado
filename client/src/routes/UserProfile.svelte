@@ -36,28 +36,26 @@
 
 <style>
   #profile-view {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
   }
 
   #profile-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     margin: auto;
-  }
-
-  #edit-icon {
-    position: absolute;
-    width: 40px;
-    height: 16px;
-    fill: white;
+    width: 100%;
   }
 
   #profile-info {
-    display: inline-block;
-    margin-left: 40px;
-    vertical-align: top;
+    display: flex;
+    flex-direction: row;
   }
 
-  #username {
-    font-weight: bold;
-    font-size: 1.6em;
+  #profile-img-wrapper {
+    margin-right: 20px;
   }
 
   #down {
@@ -67,10 +65,15 @@
   }
 
   #sidebar {
-    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
     width: auto;
     margin-right: 20px;
-    display: inline-block;
+  }
+
+  p {
+    margin: 10px;
   }
 
   #gallery {
@@ -81,35 +84,12 @@
     flex-grow: 1;
   }
 
-  #log-off-wrapper {
-    position: absolute;
-    bottom: 0;
-    text-align: center;
-  }
-
-  #log-off-wrapper>button {
-    width: 70px;
-    background-color: var(--color-red);
-  }
-
-  #drawings-sidebar {
-    margin-right: 20px;
-  }
-
-  #biography {
-    width: 60%;
-  }
-
   span {
     vertical-align: top;
   }
 
   .gallery-selection {
     font-weight: bold;
-  }
-
-  #votes {
-    float: right;
   }
 
   .vote-icon {
@@ -133,17 +113,54 @@
     cursor: not-allowed;
     font-size: 0.9em;
   }
+
+  @media screen and (max-width: 534px) {
+    #profile-view {
+      flex-direction: column;
+    }
+
+    #profile-info {
+      text-align: center;
+      flex-direction: column;
+    }
+
+    #sidebar {
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-items: baseline;
+      margin-right: 0;
+    }
+
+    .gallery-selection {
+      margin-right: 5px;
+    }
+
+    #profile-card {
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    #down {
+      text-align: center;
+    }
+
+    #profile-img-wrapper {
+      margin-right: 0;
+    }
+  }
 </style>
 
 <section id='profile-view'>
   {#if user}
     <div id='profile-card'>
-      <ProfilePicture width='110px' height='110px' />
       <div id='profile-info'>
-        <span id='username' style='color: {user.accentColor}'>{user.username}</span>
-        <p id='biography'>{user.biography}<p>
+        <div id='profile-img-wrapper'>
+          <ProfilePicture width='110px' height='110px' />
+        </div>
+        <h2>{user.username}</h2>
       </div>
-      <div id='votes'>
+      <div id='votes-wrapper'>
         <div class='vote-wrapper'>
           <div class='vote-icon icon-jump'>{@html Clap}</div>
           <span class='vote-count'>{user.sketches.reduce((a, { votes }) => a + (votes.claps && getVotes(votes.claps)) || 0, 0)}</span>
@@ -160,14 +177,9 @@
     </div>
     <div id='down'>
       <div id='sidebar'>
-        <p id='drawings-sidebar' class='gallery-selection selected'>Drawings ({user.sketches.length})</p>
-        <p class='gallery-selection unavailable'>Voted</p>
+        <p class='gallery-selection selected'>Drawings</p>
+        <p class='gallery-selection unavailable'>Votes</p>
         <p class='gallery-selection unavailable'>Collections</p>
-        {#if $loggedUser?.username === user.username}
-          <div id='log-off-wrapper'>
-            <button on:click={handleLogoff}>Log-off</button>
-          </div>
-        {/if}
       </div>
       <div id='gallery'>
         {#if user.sketches.length !== 0}
