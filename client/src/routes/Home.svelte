@@ -28,7 +28,10 @@
       'popular',
       [0, 10]
     )
-    storedSketches.set(toObjFromId(sketches))
+    const sketchesById = toObjFromId(sketches)
+
+    console.log(sketchesById)
+    storedSketches.update(s => ({ ...s, ...sketchesById }))
     console.log($storedSketches)
   })
 

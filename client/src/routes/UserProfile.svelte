@@ -5,7 +5,7 @@
   import SketchContainer from '../components/SketchContainer.svelte'
   import SpinningSquare from '../components/SpinningSquare.svelte'
   import { createCanvas } from '../utils/Canvas.js'
-  import { loggedUser, alert } from '../Store.js'
+  import { loggedUser, alert, storedSketches } from '../Store.js'
   import { getVotes, toObjFromId } from '../utils/Utils.js'
   import Clap from '../assets/clap.svg'
   import Heart from '../assets/heart.svg'
@@ -29,6 +29,7 @@
   onMount(async () => {
     user = await fetchUserWithUsername(params.username)
     sketchesById = toObjFromId(user.sketches)
+    storedSketches.update(o => ({ ...o, ...sketchesById }))
   })
 
 </script>
