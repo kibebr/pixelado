@@ -45,7 +45,7 @@
 <style>
   :global(:root) {
     --color-red: #FF4F38;
-    --color-green: #38FFB3;
+    --color-green: #38FF4F;
     --color-blue: #4F36FF;
     --color-grey: #F5F5F7;
     --color-pink: #FF38E8;

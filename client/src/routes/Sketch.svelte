@@ -16,8 +16,8 @@
 
   const small = document.body.clientWidth < 700
 
-  let canvasWidth = small ? 224 : 527
-  let canvasHeight = small ? 224 : 527
+  let canvasWidth = small ? 224 : 544
+  let canvasHeight = small ? 224 : 544
 
   let canvas
   let comment = ''
@@ -155,6 +155,7 @@
 
   #submit-comment-btn {
     display: flex;
+    color: white;
     margin: 0 auto;
     margin-top: 20px;
     background-color: var(--color-green);
