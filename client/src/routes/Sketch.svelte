@@ -122,6 +122,7 @@
 
   #votes {
     margin-top: 20px;
+    margin-bottom: 20px;
     display: block;
   }
 
@@ -137,7 +138,7 @@
   #box {
     margin: 0 auto;
     margin-top: 20px;
-    width: 60%;
+    width: 50%;
     padding: 10px;
     border-radius: 5px;
     text-align: center;
@@ -157,9 +158,6 @@
     margin: 0 auto;
     margin-top: 20px;
     background-color: var(--color-green);
-  }
-
-  #sketch-comments {
   }
 
   .comment-wrapper {
@@ -207,7 +205,7 @@
             <textarea bind:value={comment} placeholder="How do you like {$storedSketches[params.id].author}'s drawing?" />
             <button id='submit-comment-btn' on:click={handleSubmitComment}>Submit</button>
           </div>
-          <h3>Comments <span class='small'>{$storedSketches[params.id].comments.length} COMMENT(S)</span></h3>
+          <h3>Comments</h3>
           {#each $storedSketches[params.id].comments as comment}
             <div class='comment-wrapper'>
               <Comment author={comment.author} content={comment.content} date={comment.date} />

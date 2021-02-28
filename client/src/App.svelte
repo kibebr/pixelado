@@ -32,6 +32,8 @@
     document.body.addEventListener('keydown', event => {
       event.keyCode === 9 && document.body.classList.remove('using-mouse')
     })
+
+    loggedUser.set(null)
   })
 
   $: {
@@ -161,8 +163,7 @@
   }
 
   #body {
-    padding: 70px;
-    padding: 100px 70px 100px 70px;
+    padding: 20px 70px 20px 70px;
   }
 
   :global(.sketch) {
@@ -265,27 +266,10 @@
     }
   }
 
-  @keyframes -global-gradient-anim{
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
-
-  @media (shape: round) {
-    .gradient {
-      display: none;
-    }
-  }
-
   @media screen and (max-width: 700px) {
     #body {
       padding: 20px;
+      padding-top: 20px;
     }
   }
 </style>

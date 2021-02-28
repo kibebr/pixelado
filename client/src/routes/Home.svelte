@@ -1,18 +1,11 @@
 <script>
   import SpinningSquare from '../components/SpinningSquare.svelte'
-  import LoginRegisterModal from '../components/LoginRegisterModal.svelte'
   import SketchContainer from '../components/SketchContainer.svelte'
-  import { fly } from 'svelte/transition'
-  import { jump } from '../utils/svelteCustomTransitions.js'
   import { onMount } from 'svelte'
-  import { createCanvas } from '../utils/Canvas.js'
-  import { createGradientFromSketch } from '../utils/Colors.js'
   import { fetchSketches } from '../services/SketchService.js'
-  import { push } from 'svelte-spa-router'
-  import { storedSketches, loggedUser, isLoginModalOpen } from '../Store.js'
-  import { createSketchGradient } from '../utils/Elements.js'
+  import { storedSketches } from '../Store.js'
   import Select from 'svelte-select'
-  import { toObjFromId, getVotes } from '../utils/Utils.js'
+  import { toObjFromId } from '../utils/Utils.js'
 
   let paginationRange = [0, 10]
   let sketches = null
@@ -45,13 +38,6 @@
 </script>
 
 <style>
-  canvas {
-    display: block;
-    width: 224px;
-    height: 224px;
-    image-rendering: pixelated;
-  }
-
   #bar {
     margin-bottom: 40px;
   }
@@ -100,12 +86,18 @@
   }
 
   @media only screen and (max-width: 541px) {
+    #bar {
+      margin-bottom: 0px !important;
+    }
+
     #left {
       justify-content: center;
     }
+
     #right {
       display: none;
     }
+
     #center {
       display: none;
     }

@@ -26,17 +26,18 @@
 
 <style>
   nav {
-    position: fixed;
+    margin-top: 10px;
+    padding-right: 70px;
+    padding-left: 70px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
     height: 80px;
-    top: 0;
     z-index: 2;
     text-align: right;
-  }
-
-  nav>* {
-    position: absolute;
-    bottom: 0;
+    background-color: var(--color-grey);
   }
 
   button {
@@ -86,13 +87,18 @@
     background-color: var(--color-pink);
   }
 
+  #nav-draw-btn:hover {
+    background-color: var(--color-pink);
+    color: white;
+  }
+
   #nav-login-btn {
     background-color: var(--color-blue);
   }
 
   @media screen and (max-width: 480px) {
-    #nav-btns {
-      display: none;
+    nav {
+      padding: 20px;
     }
 
     #nav-box {

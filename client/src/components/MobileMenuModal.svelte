@@ -14,6 +14,7 @@
     color: black;
   }
 </style>
+
 <Modal>
   <div id='content' class='absolute-center'>
     <span>Log-in</span>
