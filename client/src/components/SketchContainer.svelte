@@ -75,7 +75,7 @@
       {/if}
     </div>
   </div>
-  <a href='#/user/{sketch.author}'>
+  <a aria-label='Go to owner profile' href='#/user/{sketch.author}'>
     <span class='made-by'>by {sketch.author}</span>
   </a>
 </div>

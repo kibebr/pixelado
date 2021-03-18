@@ -6,7 +6,6 @@
   import AlertBox from './components/AlertBox.svelte'
   import { onMount } from 'svelte'
   import { wrap } from 'svelte-spa-router/wrap'
-  import { getCurrentSession, setCurrentSession } from './utils/Session.js'
   import { loggedUser, isLoginModalOpen, alert } from './Store.js'
   import { fly } from 'svelte/transition'
 
@@ -32,8 +31,6 @@
     document.body.addEventListener('keydown', event => {
       event.keyCode === 9 && document.body.classList.remove('using-mouse')
     })
-
-    loggedUser.set(null)
   })
 
   $: {
@@ -49,7 +46,7 @@
     --color-blue: #4F36FF;
     --color-grey: #F5F5F7;
     --color-pink: #FF38E8;
-    --color-darkgrey: rgba(0, 0, 0, 0.5);
+    --color-darkgrey: rgba(0, 0, 0, 0.7);
   }
   
   :global(*) {

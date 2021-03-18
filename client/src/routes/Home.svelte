@@ -78,11 +78,9 @@
 
   #sketch-gallery {
     position: relative;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 224px);
-    grid-auto-flow: dense;
-    grid-column-gap: 25px;
-    grid-row-gap: 50px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
   }
 
   @media only screen and (max-width: 541px) {
@@ -113,12 +111,15 @@
   <div id='bar' class='flex align-center justify-center'>
     <div id='left' class='bar-div'>
       <Select 
+         inputAttributes={{
+          'aria-label': 'Sort'
+         }}
          items={[{
-         value: 'popular',
-         label: 'Popular'
+          value: 'popular',
+          label: 'Popular'
          }, {
-         value: 'new',
-         label: 'New'
+          value: 'new',
+          label: 'New'
          }]} 
          selectedValue={{ value: 'popular', label: 'Popular' }}
          isSearchable={false}

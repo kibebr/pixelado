@@ -55,5 +55,5 @@
   "engine": {
     "node": "14.3.0"
   },
-  "type": "module"
+  "type": "commonjs"
 }

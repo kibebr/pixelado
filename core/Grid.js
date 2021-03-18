@@ -3,17 +3,17 @@ const isOutOfBounds = (limitx, limity) => (x, y) =>
 
 export const createGrid = ({ width, height, paintedBoxes } = {}) => ({
   paintedBoxes: paintedBoxes || new Map(),
-  width: width || 32,
-  height: height || 32,
+  width: width || 64,
+  height: height || 64
 })
 
 export const createDrawing = () => ({
-  width: 32,
-  height: 32,
+  width: 64,
+  height: 64,
   layers: [{
     grid: createGrid({
-      width: 32,
-      height: 32
+      width: 64,
+      height: 64
     })
   }]
 })
@@ -39,7 +39,7 @@ export const flood = ({ x, y, targetColor, color } = {}) => grid => {
     return
   }
 
-  if (box !== _targetColor || isOutOfBounds(grid.size.w, grid.size.h)(x, y)) {
+  if (box !== _targetColor || isOutOfBounds(grid.width, grid.height)(x, y)) {
     return
   }
 
@@ -50,3 +50,6 @@ export const flood = ({ x, y, targetColor, color } = {}) => grid => {
   flood({ x: x - 1, y, targetColor: _targetColor, color })(grid)
 }
 
+export const circle = ({ x, y, radius }) => grid => {
+  // TODO - mid-point circle algorithm
+}

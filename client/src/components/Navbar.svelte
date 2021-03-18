@@ -3,16 +3,6 @@
   import { push, location } from 'svelte-spa-router'
   import Modal from '../components/Modal.svelte'
   import { fade } from 'svelte/transition'
-
-  let isMobileModalOpen = false
-
-  const handleBoxClick = () => {
-    if (window.innerWidth >= 480) {
-      push('/')
-    } else {
-      isMobileModalOpen = true
-    }
-  }
 </script>
 
 <style>
@@ -75,46 +65,28 @@
   }
 
   #nav-draw-btn {
-    background-color: var(--color-pink);
-  }
-
-  #nav-draw-btn:hover {
-    background-color: var(--color-pink);
-    color: white;
+    background-color: var(--color-darkgrey);
   }
 
   #nav-login-btn {
-    background-color: var(--color-blue);
+    background-color: var(--color-darkgrey);
   }
 
   @media screen and (max-width: 480px) {
     nav {
       padding: 20px;
     }
-
-    #nav-box {
-      top: 40px;
-      left: 52%;
-      transform: translateX(-50%);
-    }
   }
 </style>
 
-{#if isMobileModalOpen}
-  <Modal>
-    <div id='mobile-nav'>
-      <span>Home</span>
-      <span on:click={() => isLoginModalOpen.set(true)}>Log-in</span>
-    </div>
-  </Modal>
-{/if}
-
 <nav class='flex justify-center align-center'>
   {#if $location !== '/draw'}
-    <div id='nav-box' on:click={handleBoxClick}>
-      <div id='nav-logo' class='gradient'></div>
-      <span id='nav-title'>pixelado</span>
-    </div>
+    <a href='/'>
+      <div id='nav-box'>
+        <div id='nav-logo' class='gradient'></div>
+        <span id='nav-title'>pixelado</span>
+      </div>
+    </a>
   {/if}
   <div id='nav-btns'>
     {#if $location !== '/draw'}
