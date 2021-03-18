@@ -31,10 +31,6 @@
   #log-off-btn {
     background-color: #FF6961;
   }
-
-  span:hover {
-    text-decoration: underline;
-  }
 </style>
 
 <div id='user-card'>

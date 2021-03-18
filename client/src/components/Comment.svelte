@@ -4,7 +4,6 @@
 
   export let author
   export let content
-  export let date
 </script>
 
 <style>
@@ -22,10 +21,6 @@
     height: 35px;
     align-items: center;
     font-weight: bold;
-  }
-
-  h4 {
-    margin-top: 0;
   }
 
   .profile-pic-wrapper {

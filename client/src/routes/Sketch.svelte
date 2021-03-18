@@ -166,10 +166,6 @@
     margin: 0 auto;
     margin-top: 20px;
   }
-  .small {
-    font-size: 0.4em;
-    color: rgba(0, 0, 0, 0.4);
-  }
 
   @media screen and (max-width: 700px) {
     #box {

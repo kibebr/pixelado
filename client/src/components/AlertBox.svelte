@@ -33,13 +33,6 @@
     color: black;
     font-size: 1em;
   }
-
-  .icon {
-    position: absolute;
-    display: inline-block;
-    width: 24px;
-    height: 24px;
-  }
 </style>
 
 <div id='alert-box' style='background-color: {getColorForType()}'>

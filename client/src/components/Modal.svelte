@@ -1,9 +1,5 @@
 <script>
-  import { fade } from 'svelte/transition'
   import { jump } from '../utils/svelteCustomTransitions.js'
-
-  export let handleCloseButtonClick
-  export let messages
 </script>
 
 <style>

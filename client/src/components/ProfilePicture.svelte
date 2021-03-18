@@ -17,4 +17,4 @@
   }
 </style>
 
-<img src={ProfilePic} style='width: {width}; height: {height};'alt='Default profile picture.' >
+<img src={ProfilePic} style='width: {width}; height: {height};' alt='Default profile pic.' />

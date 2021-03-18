@@ -2,15 +2,8 @@
   import { loggedUser, isLoginModalOpen } from '../Store.js'
   import { push, location } from 'svelte-spa-router'
   import Modal from '../components/Modal.svelte'
-  import LoginRegisterModal from '../components/LoginRegisterModal.svelte'
-  import MobileMenuModal from '../components/MobileMenuModal.svelte'
-  import UserCard from '../components/UserCard.svelte'
-  import { login, register } from '../services/SessionService.js'
-  import { setCurrentSession } from '../utils/Session.js'
   import { fade } from 'svelte/transition'
-  import Select from 'svelte-select'
-      
-  let shouldShowNav
+
   let isMobileModalOpen = false
 
   const handleBoxClick = () => {
@@ -20,8 +13,6 @@
       isMobileModalOpen = true
     }
   }
-
-  $: shouldShowNav = true
 </script>
 
 <style>
