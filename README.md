@@ -6,4 +6,4 @@ Draw pixel art and share it!
 ## Folder Structure
 - `/client`: the front-end of the application. It uses HTML, CSS, and Svelte. It is bundled with Webpack.
 - `/core`: all of the grid logic.
-- `/server`: the back-end of the application. It uses Node.JS with Express.
+- `/server`: the back-end of the application. It uses Node.JS with Express, and MongoDB as the database.
