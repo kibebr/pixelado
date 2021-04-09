@@ -215,14 +215,6 @@
 </style>
 
 <div id='draw-view'>
-  <div id='grids'>
-    <div class='a'>1</div>
-    +
-  </div>
-  <span>
-    <input />
-    x
-  </span>
   <div id='side-bar'>
     <a href='#/'>
       <div class='side-bar-square'>
@@ -243,7 +235,6 @@
     </div>
   </div>
   <div id='color-picker'></div>
-  <h1>my beautiful drawing</h1>
   <div 
        id='container' 
        bind:this={container} 

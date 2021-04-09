@@ -273,9 +273,8 @@
 
 {#if $location !== '/draw'}
   <div id='color' class='gradient colors'></div>
+  <Navbar />
 {/if}
-
-<Navbar />
 <div id='body'>
   <div id='app'>
     <Router {routes} />
