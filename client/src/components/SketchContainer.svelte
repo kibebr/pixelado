@@ -53,7 +53,7 @@
 
 <div transition:jump='{{ duration: 30 }}' class='sketch-container'>
   <p class='sketch-title'>{sketch.title}</p>
-  <a href='#/sketch/{sketch.id}'>
+  <a aria-label='Go to sketch' href='#/sketch/{sketch.id}'>
     <canvas width=224 height=224 class='opacity-effect' bind:this={canvas}></canvas>
   </a>
   <div class='sketch-info'>
