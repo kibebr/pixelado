@@ -234,35 +234,6 @@
     height: 10px;
   }
 
-  :global(.todark) {
-    animation: todark 0.5s;
-    animation-fill-mode: forwards;
-  }
-
-  :global(.towhite) {
-    animation: towhite 0.5s;
-    animation-fill-mode: forwards;
-  }
-
-  @keyframes -global-todark {
-    to { 
-      background-color: #0A0913;
-      color: white;
-    }
-  }
-
-  @keyframes -global-towhite {
-    from {
-      background-color: #0A0913;
-      color: white;
-    }
-
-    to { 
-      background-color: white;
-      color: #1A202C;
-    }
-  }
-
   @media screen and (max-width: 700px) {
     #body {
       padding: 20px;

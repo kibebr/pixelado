@@ -76,7 +76,6 @@
   onDestroy(() => {
     drawingStore.save(drawings)
     colorPicker.remove()
-    document.body.classList.add('towhite')
   })
 
   const handleMouseAction = event => {
@@ -188,9 +187,8 @@
     font-weight: bold;
     position: absolute;
     right: 70px;
-    bottom: 20px;
-    border-bottom: 2px solid lime;
-    cursor: pointer;
+    bottom: 30px;
+    background-color: var(--color-green);
   }
 
   .a {
@@ -248,4 +246,4 @@
   <div id='layers' class='center-x'>
 
   </div>
-  <span id='submit' on:click={handleSubmit}>Submit</span>
+  <button id='submit' on:click={handleSubmit}>Submit</button>
