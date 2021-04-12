@@ -2,7 +2,8 @@ import iro from '@jaames/iro'
 
 export const createColorPicker = () => {
   const colorPicker = new iro.ColorPicker('#color-picker', {
-    width: 200
+    width: 200,
+    color: '#FF0000'
   })
   
   

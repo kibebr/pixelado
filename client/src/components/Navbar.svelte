@@ -6,7 +6,7 @@
 </script>
 
 <style>
-  nav {
+  header {
     margin-top: 10px;
     padding-right: 70px;
     padding-left: 70px;
@@ -52,18 +52,6 @@
     cursor: pointer;
   }
 
-  #mobile-nav {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 3em;
-  }
-
-  #mobile-nav>span {
-    display: block;
-  }
-
   #nav-draw-btn {
     background-color: var(--color-darkgrey);
   }
@@ -79,7 +67,7 @@
   }
 </style>
 
-<nav class='flex justify-center align-center'>
+<header class='flex justify-center align-center'>
   {#if $location !== '/draw'}
     <a href='/'>
       <div id='nav-box'>
@@ -88,7 +76,7 @@
       </div>
     </a>
   {/if}
-  <div id='nav-btns'>
+  <nav id='nav-btns'>
     {#if $location !== '/draw'}
       <a href='#/draw'>
         <button id='nav-draw-btn' transition:fade='{{ duration: 100 }}'>Draw</button>
@@ -101,5 +89,5 @@
         <span>{$loggedUser.username}</span>
       </a>
     {/if}
-  </div>
-</nav>
+  </nav>
+</header>
