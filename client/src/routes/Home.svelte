@@ -23,9 +23,7 @@
     )
     const sketchesById = toObjFromId(sketches)
 
-    console.log(sketchesById)
     storedSketches.update(s => ({ ...s, ...sketchesById }))
-    console.log($storedSketches)
   })
 
   const selectFilter = async newFilter => {
